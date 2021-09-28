@@ -1,0 +1,307 @@
+{% extends 'layout.html' %}
+{{ super() }}
+{% block extrahead %}
+<link rel="stylesheet" href="{{ url_for("static", filename="mod_gameselect/styles.css") }}">
+{% endblock %}
+{% block content %}
+    <script src="../static/vue.min.js"></script>
+
+    <img src="../static/logo-big.svg" alt="logo-big" class="logo-big" width="1920" height="372">
+    <img src="../static/main-man.png" alt="main-man" class="main-man" width="1920" height="427">
+
+    <div id="app"> 
+
+
+        <div class="modal micromodal-slide" id="modalSettings" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-modal-close>
+                <div class="modal__container">
+                    <div class="modal__close" data-modal-close></div>
+                    <div class="modal__content">                                      
+                        <div class="game-selector">
+                            <form method="POST" id="allOptionsForm">
+                                {{ form.csrf_token }} 
+                                <div class="tab" style="display: none;">
+                                    <button class="tablinks" v-on:click.prevent="show_creation=false"
+                                            v-bind:class="{ active: !show_creation }">Присоединиться к игре
+                                    </button>
+                                    <button class="tablinks" v-on:click.prevent="show_creation=true"
+                                            v-bind:class="{ active: show_creation }">Создать игру
+                                    </button>
+                                </div>
+
+                                <div v-if="!show_creation" class="tabcontent">
+                                    Уникальный код игры:
+                                    <input type="text" name="game_key" v-model="game_key" required>
+                                        <button v-if="true || game_key != ''" type="submit" value="join" name="action">Войти!</button>
+                                    <br>
+                                    <span v-if="error_game" class="validation-error">[[error_game]]</span>
+                                </div>
+
+                                <div v-if="show_creation" class="options">
+
+                                    <div class="options__row">
+                                        <div class="options__left">
+                                            <div>
+                                                <div class="options__title">Выдача карт защиты<div class="options__note">i</div></div>
+                                                <select name="def_card_deal" v-model="def_card_deal">
+                                                    <option value="0">Фиксированное число</option>
+                                                    <option value="1">По числу игроков</option>
+                                                    <option value="2">Поддерживать кол-во карт</option>
+                                                    <option value="3">Среднее число потраченных</option>
+                                                    <option value="4">Число оставшихся + фикс.</option>
+                                                </select>
+                                            </div>
+                                            <transition name="fade">
+                                                <div class="extra-input" v-if="def_card_deal==0 || def_card_deal==4">
+                                                    <div class="extra-input__text">Число</div> <input type="number" value="1" name="def_card_deal_size" min="0" required>
+                                                </div>
+                                            </transition> 
+                                        </div>
+                                        <div class="options__right">                                                   
+                                            <div class="options__title">Карт нападения в начале игры<div class="options__note">i</div></div>
+                                            <input name="b_offence" type="number" min="1" value="2" required>
+                                        </div>                  
+                                    </div>      
+
+                                    <div class="options__row">
+                                        <div class="options__left">
+                                            <div>
+                                                <div class="options__title">Вероятность карты случайности в начале раунда<div class="options__note">i</div></div>
+                                                <div class="range-wrapper">
+                                                    <div class="range-container">
+                                                        <input type="range" value="50" min="0" max="100" step="1" list="probs" name="acc_prob" v-model="acc_prob">
+                                                    </div>
+                                                    <datalist id="probs">
+                                                        <option value="0">
+                                                        <option value="25">
+                                                        <option value="50">
+                                                        <option value="75">
+                                                        <option value="100">
+                                                    </datalist>
+                                                    <div class="range-value">
+                                                        <div class="range-number">[[ acc_prob ]]</div>
+                                                        <div class="range-percent">%</div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="options__right"> 
+                                            <div class="options__title">Карт защиты в начале игры<div class="options__note">i</div></div>                                            
+                                            <input name="b_defence" type="number" min="1" value="5" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="options__row">
+                                        <div class="options__left">
+                                            <div>
+                                                <div class="options__title">Условие окончания игры<div class="options__note">i</div></div>
+                                                <select name="endgame" v-model="endgame">
+                                                    <option value="0">Исчерпание колоды</option>
+                                                    <option value="1">Фиксированное число раундов</option>
+                                                    <option value="2">Проигрыш одного игрока</option>
+                                                    <option value="3">Остался один игрок</option>
+                                                </select>
+                                            </div>
+                                            <transition name="fade"> 
+                                                <div class="extra-input" v-if="endgame==0"> 
+                                                    <div class="extra-input__text">Размер</div> <input type="number" value="50" name="deck_size" min="1" required>
+                                                </div>
+                                                <div class="extra-input" v-if="endgame==1">  
+                                                    <div class="extra-input__text">Число</div> <input type="number" value="50" name="num_rounds" min="1" required>
+                                                </div>
+                                            </transition> 
+                                        </div>
+                                        <div class="options__right">                                                   
+                                            <div class="options__title">Начальное количество Фолзиков<div class="options__note">i</div></div>
+                                            <input name="b_falsics" type="number" min="1" value="100" required>
+                                        </div>                  
+                                    </div>  
+ 
+                                    <div class="options-bottom">
+                                        <div class="options-bottom__element">
+                                            <div class="options__title">Стартовать игру может<div class="options__note">i</div></div>
+                                            <div class="checkbox"> 
+                                                <input type="checkbox" checked name="only_admin_starts">
+                                                <div class="checked-value">
+                                                    <div class="checkbox-image"></div>
+                                                    <div class="checkbox-label">Администратор</div>
+                                                </div>
+                                                <div class="unchecked-value">
+                                                    <div class="checkbox-image"></div>
+                                                    <div class="checkbox-label">Любой игрок</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="options-bottom__element">
+                                            <div class="options__title">Режим игры<div class="options__note">i</div></div>
+                                            <div class="checkbox"> 
+                                                <input type="checkbox" name="hardcore_mode">
+                                                <div class="unchecked-value">
+                                                    <div class="checkbox-image"></div>
+                                                    <div class="checkbox-label">Стандартный</div>
+                                                </div>
+                                                <div class="checked-value">
+                                                    <div class="checkbox-image"></div>
+                                                    <div class="checkbox-label">Сложный</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="options-bottom__element">
+                                            <div class="options__title">Можно нападать<div class="options__note">i</div></div>
+                                            <div class="checkbox"> 
+                                                <input type="checkbox" checked name="can_attack_anyone">
+                                                <div class="checked-value">
+                                                    <div class="checkbox-image"></div>
+                                                    <div class="checkbox-label">На любого игрока</div>
+                                                </div>
+                                                <div class="unchecked-value">
+                                                    <div class="checkbox-image"></div>
+                                                    <div class="checkbox-label">По порядку</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>   
+
+                                    <button type="submit" class="button button--options" value="create" name="action"><span>Создать игру</span></button>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal micromodal-slide" id="modalName" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1">
+                <div class="modal__container"> 
+                    <div class="modal__content">  
+                        <div class="modalName__title">Как вы будете представлены в игре?</div> 
+                        <div class="modalName__wrapper">
+                            <div class="modalName__input">
+                                <div class="modalName__label">Ваше имя в игре</div>
+                                <input type="text" form="allOptionsForm" name="player_name" required>
+                                <span v-if="error_name" class="validation-error">[[error_name]]</span>
+                            </div>
+                        </div>                            
+                        <button type="button" form="allOptionsForm" class="button button--options"><span data-modal-close>Продолжить</span></button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="front-page front-page--padding-to-center">
+            <div class="front-page__text">Выберите уровень сложности</div>
+            <ul class="front-page__difficult">
+                <li class="front-page__difficult-element front-page__difficult-element--easy">
+                    <a href="javascript:;" onclick="setLevelDificult(0)" class="front-page__difficult-link"><span class="front-page__difficult-text">Начинающий</span></a>
+                    <div class="front-page__difficult-note">По 10 фолзиков, 5 карт защиты, 3 карты нападения, без случайных карт,с подсказками, простой режим игры</div>
+                </li>
+                <li class="front-page__difficult-element front-page__difficult-element--normal">
+                    <a href="javascript:;" onclick="setLevelDificult(1)" class="front-page__difficult-link"><span class="front-page__difficult-text">Разбирающийся</span></a>
+                    <div class="front-page__difficult-note">По 30 фолзиков, 5 карт защиты, 3 карты нападения, без случайных карт,без подсказок, сложный режим игры</div>
+                </li>
+                <li class="front-page__difficult-element front-page__difficult-element--hard">
+                    <a href="javascript:;" onclick="setLevelDificult(2)" class="front-page__difficult-link"><span class="front-page__difficult-text">Стратег</span></a>
+                    <div class="front-page__difficult-note">По 50 фолзиков, 5 карт защиты, 3 карты нападения, случайные карты,без подсказок, сложный режим игры, остался один игрок</div>
+                </li>
+            </ul>
+            <div class="front-page__buttons">
+                <a href="javascript:;" class="front-page__button" data-modal="modalRules">
+                    <div class="front-page__button-ico-wrapper">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.2232 9.85122L15.206 9.97978L15.308 10.0599L17.1924 11.5412L17.1923 11.5413L17.198 11.5455C17.2768 11.6035 17.308 11.7095 17.247 11.8234L15.4486 14.9331L15.4485 14.9331L15.4458 14.938C15.3911 15.0384 15.2796 15.0779 15.1729 15.0406L12.9363 14.1422L12.8153 14.0936L12.7123 14.1735C12.2681 14.518 11.7797 14.8072 11.2472 15.0239L11.1261 15.0731L11.1078 15.2025L10.7703 17.5837L10.7703 17.5837L10.7698 17.5874C10.7564 17.6948 10.669 17.7727 10.5547 17.7727H6.9547C6.85085 17.7727 6.75764 17.7032 6.72856 17.5756L6.39222 15.2025L6.37388 15.0731L6.25283 15.0239C5.72147 14.8077 5.24185 14.5187 4.78597 14.1722L4.68334 14.0942L4.56374 14.1422L2.33194 15.0387C2.21314 15.0735 2.10462 15.0304 2.05422 14.938L2.05428 14.938L2.05144 14.9331L0.253527 11.8242C0.229202 11.7775 0.221464 11.7239 0.231638 11.6722L0.00863952 11.6283L0.231638 11.6722C0.241833 11.6204 0.269389 11.5736 0.309718 11.5396L2.20991 10.0606L2.31676 9.97744L2.2945 9.84389C2.25023 9.57828 2.23197 9.28196 2.23197 9C2.23197 8.72711 2.26735 8.43153 2.31325 8.15612L2.33551 8.02256L2.22866 7.9394L0.32554 6.45815L0.325719 6.45792L0.316279 6.45131C0.237763 6.39635 0.208584 6.28748 0.270625 6.17865C0.270675 6.17856 0.270725 6.17847 0.270775 6.17839L2.06107 3.06646L2.06112 3.06649L2.06359 3.06196C2.11831 2.96164 2.22982 2.92207 2.33653 2.9594L4.57311 3.85777L4.69229 3.90564L4.79478 3.82825C5.24225 3.49037 5.73138 3.19208 6.26221 2.97615L6.38326 2.92691L6.4016 2.79752L6.73865 0.419387C6.75983 0.298225 6.84861 0.227276 6.9547 0.227276L10.5547 0.227277L10.5555 0.227274C10.6097 0.227085 10.6622 0.24634 10.7034 0.281542C10.7443 0.316482 10.7714 0.364831 10.7799 0.417923L11.1172 2.79752L11.1355 2.92691L11.2566 2.97615C11.7879 3.1923 12.2675 3.48135 12.7234 3.82782L12.826 3.90582L12.9457 3.85777L15.1816 2.95964C15.2319 2.94248 15.2866 2.94322 15.3364 2.9618C15.3874 2.9808 15.43 3.01722 15.4566 3.0646L15.4566 3.06461L15.458 3.06691L17.2559 6.1758C17.2802 6.22249 17.2879 6.2761 17.2778 6.32782C17.2676 6.37964 17.24 6.42641 17.1997 6.46043L15.2995 7.9394L15.1926 8.02256L15.2149 8.15612C15.2592 8.42187 15.2774 8.70886 15.2774 9C15.2774 9.30006 15.2592 9.58062 15.2232 9.85122ZM5.15242 9C5.15242 10.9818 6.77293 12.6023 8.7547 12.6023C10.7365 12.6023 12.357 10.9818 12.357 9C12.357 7.01823 10.7365 5.39773 8.7547 5.39773C6.77293 5.39773 5.15242 7.01823 5.15242 9Z" fill="#00FFFF" stroke="#00FFFF" stroke-width="0.454545"/>
+                        </svg>
+                    </div>
+                    <div class="front-page__button-text">Правила игры</div>
+                </a>
+                <a href="javascript:;" class="front-page__button" onclick="nameModalCheck()">
+                    <div class="front-page__button-ico-wrapper">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.2232 9.85122L15.206 9.97978L15.308 10.0599L17.1924 11.5412L17.1923 11.5413L17.198 11.5455C17.2768 11.6035 17.308 11.7095 17.247 11.8234L15.4486 14.9331L15.4485 14.9331L15.4458 14.938C15.3911 15.0384 15.2796 15.0779 15.1729 15.0406L12.9363 14.1422L12.8153 14.0936L12.7123 14.1735C12.2681 14.518 11.7797 14.8072 11.2472 15.0239L11.1261 15.0731L11.1078 15.2025L10.7703 17.5837L10.7703 17.5837L10.7698 17.5874C10.7564 17.6948 10.669 17.7727 10.5547 17.7727H6.9547C6.85085 17.7727 6.75764 17.7032 6.72856 17.5756L6.39222 15.2025L6.37388 15.0731L6.25283 15.0239C5.72147 14.8077 5.24185 14.5187 4.78597 14.1722L4.68334 14.0942L4.56374 14.1422L2.33194 15.0387C2.21314 15.0735 2.10462 15.0304 2.05422 14.938L2.05428 14.938L2.05144 14.9331L0.253527 11.8242C0.229202 11.7775 0.221464 11.7239 0.231638 11.6722L0.00863952 11.6283L0.231638 11.6722C0.241833 11.6204 0.269389 11.5736 0.309718 11.5396L2.20991 10.0606L2.31676 9.97744L2.2945 9.84389C2.25023 9.57828 2.23197 9.28196 2.23197 9C2.23197 8.72711 2.26735 8.43153 2.31325 8.15612L2.33551 8.02256L2.22866 7.9394L0.32554 6.45815L0.325719 6.45792L0.316279 6.45131C0.237763 6.39635 0.208584 6.28748 0.270625 6.17865C0.270675 6.17856 0.270725 6.17847 0.270775 6.17839L2.06107 3.06646L2.06112 3.06649L2.06359 3.06196C2.11831 2.96164 2.22982 2.92207 2.33653 2.9594L4.57311 3.85777L4.69229 3.90564L4.79478 3.82825C5.24225 3.49037 5.73138 3.19208 6.26221 2.97615L6.38326 2.92691L6.4016 2.79752L6.73865 0.419387C6.75983 0.298225 6.84861 0.227276 6.9547 0.227276L10.5547 0.227277L10.5555 0.227274C10.6097 0.227085 10.6622 0.24634 10.7034 0.281542C10.7443 0.316482 10.7714 0.364831 10.7799 0.417923L11.1172 2.79752L11.1355 2.92691L11.2566 2.97615C11.7879 3.1923 12.2675 3.48135 12.7234 3.82782L12.826 3.90582L12.9457 3.85777L15.1816 2.95964C15.2319 2.94248 15.2866 2.94322 15.3364 2.9618C15.3874 2.9808 15.43 3.01722 15.4566 3.0646L15.4566 3.06461L15.458 3.06691L17.2559 6.1758C17.2802 6.22249 17.2879 6.2761 17.2778 6.32782C17.2676 6.37964 17.24 6.42641 17.1997 6.46043L15.2995 7.9394L15.1926 8.02256L15.2149 8.15612C15.2592 8.42187 15.2774 8.70886 15.2774 9C15.2774 9.30006 15.2592 9.58062 15.2232 9.85122ZM5.15242 9C5.15242 10.9818 6.77293 12.6023 8.7547 12.6023C10.7365 12.6023 12.357 10.9818 12.357 9C12.357 7.01823 10.7365 5.39773 8.7547 5.39773C6.77293 5.39773 5.15242 7.01823 5.15242 9Z" fill="#00FFFF" stroke="#00FFFF" stroke-width="0.454545"/>
+                        </svg>
+                    </div>
+                    <div class="front-page__button-text">Настройки</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script> 
+        const app = new Vue({
+            el: '#app',
+            data: {
+                show_creation: "" === "{{ g.game_key }}" && !( "{{ g.error_game }}"),
+                acc_prob: 0,
+                endgame: 3,
+                game_key: "{{ g.game_key }}",
+                error_name: "{{ g.error_name }}",
+                error_game: "{{ g.error_game }}",
+                def_card_deal: 0,
+            },
+            delimiters: ['[[', ']]'],
+
+        });
+
+        socket.on('upd', function (data) {
+            app.message = data;
+        });
+        function nameModalCheck(whichModal = 'modalName'){  
+            MicroModal.show(whichModal,{
+                //onShow: modal => console.info(`${modal.id} is shown`),  
+                onClose: modal => nextModal(`${modal.id}`), 
+                openTrigger: 'data-modal',  
+                closeTrigger: 'data-modal-close',  
+                openClass: 'is-open', 
+                disableScroll: false,  
+                disableFocus: true,  
+                awaitOpenAnimation: false,  
+                awaitCloseAnimation: true,  
+                debugMode: false  
+            });
+        }
+        function nextModal(modalId){  
+            if(modalId == 'modalName' && document.querySelector('input[name="player_name"]').value){
+                nameModalCheck('modalSettings');
+            }
+        }
+        function setLevelDificult(level) {
+            const settings = [{
+                falsics: 10,
+                defense: 5,
+                offence: 3,
+                acc_prob: 0,
+                hardcore_mode: false
+            },
+            {
+                falsics: 30,
+                defense: 5,
+                offence: 3,
+                acc_prob: 0,
+                hardcore_mode: true
+            },
+            {
+                falsics: 100,
+                defense: 5,
+                offence: 3,
+                acc_prob: 100,
+                hardcore_mode: true
+            }];
+            const falsicsInput = document.querySelector('input[name="b_falsics"]');
+            const defenseInput = document.querySelector('input[name="b_defence"]');
+            const offenceInput = document.querySelector('input[name="b_offence"]');
+            const accProbInput = document.querySelector('input[name="acc_prob"]');
+            const accProbNumberText = document.querySelector('.range-number');
+            const hardcoreModeInput = document.querySelector('input[name="hardcore_mode"]');
+
+            falsicsInput.value = settings[level].falsics;
+            defenseInput.value = settings[level].defense;
+            offenceInput.value = settings[level].offence;
+            accProbInput.value = settings[level].acc_prob;
+            accProbNumberText.textContent = settings[level].acc_prob;
+            hardcoreModeInput.checked = settings[level].hardcore_mode;
+            nameModalCheck();
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends 'layout.html' %}
+{{ super() }}
+{% block extrahead %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="mod_game/waitroom.css") }}">
+    <script src="{{ url_for('static', filename='conn.js') }}"></script>
+{% endblock %}
+{% block content %}
+
+    <style>
+        .holder {
+            background-color: white;i
+        }
+        .renderjson a {
+            text-decoration: none;
+        }
+
+        .renderjson .disclosure {
+            color: crimson;
+            font-size: 150%;
+        }
+
+        .renderjson .syntax {
+            color: grey;
+        }
+
+        .renderjson .string {
+            color: darkred;
+        }
+
+        .renderjson .number {
+            color: darkcyan;
+        }
+
+        .renderjson .boolean {
+            color: blueviolet;
+        }
+
+        .renderjson .key {
+            color: darkblue;
+        }
+
+        .renderjson .keyword {
+            color: blue;
+        }
+
+        .renderjson .object.syntax {
+            color: lightseagreen;
+        }
+
+        .renderjson .array.syntax {
+            color: orange;
+        }
+
+        .holder {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .holder .caption {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin: -1px 0 0 -1px;
+            text-align: center;
+            background-color: #86dcdc;
+        }
+
+        pre.renderjson {
+            margin: 0;
+        }
+        .subscribed {
+            color: darkgreen;
+        }
+    </style>
+
+    <script src="../static/vue.min.js"></script>
+    <script src="../static/renderjson.js"></script>
+    <div id="app">
+        Status: <b>[[ status ]]</b>
+        <b class="subscribed" v-if="subscribed">Subscribed</b><button v-if="!subscribed" v-on:click="subscribe">Subscribe!</button><br/>
+        SocketIO Method:<br/> <input type="text" v-model="sockmethod"><br/>
+        SocketIO body:<br/> <textarea v-model="sockdata" cols="120" rows="8"></textarea><br/>
+        <button v-on:click="send">Send</button>
+        <button v-on:click="clear">Clear output</button> ||
+        <button v-on:click="state">State</button>
+        <button v-on:click="cards">Cards</button>
+        <div id="response">
+
+        </div>
+    </div>
+    <script>
+
+        var onevent = socket.onevent;
+        socket.onevent = function (packet) {
+            var args = packet.data || [];
+            onevent.call(this, packet);    // original call
+            packet.data = ["*"].concat(args);
+            onevent.call(this, packet);      // additional call to catch-all
+        };
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                sockmethod: "cards",
+                sockdata: "",
+                status: "Not connected",
+                subscribed: false,
+            },
+            delimiters: ['[[', ']]'],
+            methods: {
+                send: function () {
+                    if (app.sockdata.trim())
+                        socket.emit(app.sockmethod, JSON.parse(app.sockdata));
+                    else
+                        socket.emit(app.sockmethod);
+                },
+                clear: function () {
+                    document.getElementById("response").innerHTML='';
+                },
+                state: function () {
+                    socket.emit('state');
+                },
+                cards: function () {
+                    socket.emit('cards');
+                },
+                subscribe: function () {
+                    socket.emit('subscribe');
+                }
+            }
+        });
+        renderjson.set_show_to_level(5);
+        renderjson.set_icons('+', '-');
+        socket.on('subscribe', function(data) {
+            if (data.ok) {
+                app.subscribed = true;
+            }
+        })
+        socket.on('*', function (evt, data) {
+            holder = document.createElement('div');
+            holder.className = 'holder';
+            holder.innerHTML = "<div class='caption'>" + evt + "</div>";
+            document.getElementById("response").appendChild(holder);
+            if (data) {
+                holder.appendChild(
+                    renderjson(data)
+                );
+            }
+        });
+        socket.on('connect', function () {
+            app.status = "Connected"
+        });
+        socket.on('disconnect', function () {
+            app.status = "Not Connected"
+        });
+    </script>
+{% endblock %}

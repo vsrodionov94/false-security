@@ -1,0 +1,113 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    min-height: 54.1em;
+    flex-grow: 1;
+}
+.waitroom-container {
+    text-align: center;
+    padding: 0.375em 0.75em;
+    margin: auto;
+}
+.waitroom-main {
+    width: 65.1em; 
+    margin-bottom: 7em;
+}
+.waiteoom-title{
+    font-size: 1.375em;
+    line-height: 1.45; 
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-top: 0.1em;
+    margin-bottom: 1.9em;
+}
+.players{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1); 
+    border: 0.0625em dashed #95ECEB; 
+    border-radius: 0.375em;
+    padding-top: 2.3em;    
+    padding-bottom: 2em;
+    margin-bottom: 2.6em;
+}
+.players-title{
+    width: 100%;
+    font-weight: bold;
+    font-size: 0.875em;
+    line-height: 2;  
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #C4C4C4;    
+    margin-bottom: 2.2em;
+}
+.player{
+    width: 13.94em;
+    height: 5.935em;
+    margin: 0 0.6em 1.375em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 5.45em;
+    padding-right: 0.4em;
+}
+.player::before{
+    content: "";
+    transition: 0.4s opacity;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(/static/images/player-border1.svg);
+}
+.player.admin_player::before{
+    background-image: url(/static/images/player-border2.svg);
+}
+.player-name{
+    position: relative;
+    z-index: 1;
+    font-weight: 700;
+    font-size: 1.125em;
+    letter-spacing: 0.0111em;
+    line-height: 1.55;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: left;
+}
+.budget{
+    position: relative;
+    z-index: 1;
+    font-size: 1.1875em;
+    font-weight: 800;
+    line-height: 1.263;
+}  
+.waitroom-main a{
+    color: #95ECEB;
+    font-weight: 700;
+    border-bottom: dashed 0.0625em;
+    padding-bottom: 0.45em;
+    font-size: 1.125em;
+    text-transform: uppercase;
+    transition: 0.4s border;
+    margin-bottom: 1.7em;
+    display: inline-block;
+}
+.waitroom-main a:hover{
+    border-bottom-color: transparent;
+}
+.button{
+    width: 21.375em;
+    margin: 0 auto;
+}

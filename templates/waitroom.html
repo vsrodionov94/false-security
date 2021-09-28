@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{{ super() }}
+{% block extrahead %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="mod_game/waitroom.css") }}">
+    <script src="{{ url_for('static', filename='conn.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <div class="waitroom-container">
+        <div class="waitroom-main">
+            <div class="waiteoom-title" v-if="show_start">Друзья присоединяются!<br> Если команда для игры собрана, запускайтесь!</div>
+            <div id="app">
+                <div v-if="ready">
+                    <div class="players">
+                        <div class="players-title">В этом поле будут появляться участники игры</div>
+
+                        <div v-for="player in players" :key="player.name" class="player"
+                             v-bind:class="{admin_player:player.is_admin}">
+                            <span class="player-name">[[player.name]]</span>
+                            <span class="budget">[[player.money]] <span class="falsic"></span></span>
+                        </div>
+                    </div>
+                    <gamelink :link="link" display_link="Скопировать ссылку ещё раз"></gamelink>
+                    <button v-if="show_start" v-on:click="start" :disabled="start_disabled" class="button"><span>Запустить игру</span></button> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function copyLinkToClipboard() {
+            copyToClipboard(app.link);
+            snackbar("Скопировано в буфер обмена");
+            return false;
+        };
+        const app = new Vue({
+            el: '#app',
+            data: {
+                game_name: "???",
+                players: [],
+                ready: false,
+                show_start: false,
+                admin_player: '',
+                start_disabled: false,
+            },
+            delimiters: ['[[', ']]'],
+            methods: {
+                start: function () {
+                    app.start_disabled = true;
+                    socket.emit('start')
+                }
+            }
+        });
+        socket.on('waitroom', function (data) {
+            if (data.ok) {
+                if (data.value.redirect_to) {
+                    window.location.href = data.value.redirect_to;
+                } else {
+                    app.game_name = data.value.game_name;
+                    app.current_player = data.value.current_player;
+                    app.players = data.value.players;//.map((p) => ({name: p, is_admin: p == data.value.admin_player}));
+                    app.show_start = data.value.can_start;
+                    app.admin_player = data.value.admin_player;
+                    app.link = data.value.game_link;
+                    app.ready = true;
+                }
+            }
+        });
+        socket.on('connect', function () {
+            socket.emit('waitroom');
+            //socket.emit('subscribe');
+        });
+        socket.on('upd', function () {
+            socket.emit('waitroom');
+        });
+
+    </script>
+{% endblock %}

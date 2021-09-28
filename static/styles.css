@@ -1,0 +1,497 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, main, input, button {
+    margin: 0;
+    padding: 0;
+    border: 0; 
+    vertical-align: baseline;
+    box-sizing: border-box;
+} 
+*::before,*::after{
+    box-sizing: border-box;
+}
+article, aside, details, figcaption, figure,  
+footer, header, hgroup, menu, nav, section, main {
+    display: block;
+}
+body {
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0;
+    margin: 0;
+    background: #041021;
+
+    font-size: 1rem;
+    font-size: 0.833333vw; /* 16px / 1920px * 100 ;  1em = 16px при fullHD */ 
+    color: #fff;
+    min-height: 100vh;
+
+    background-image: url(game.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+input, button, select{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1em;
+    
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none; 
+}
+select{
+    border: solid 0.0625em;
+    border-radius: 0.3em;
+    padding: 0.3em;
+}
+ul{
+    list-style: none;
+}
+a{
+    color:  #fff;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+.content{
+    min-height: 67.5em;
+    display: flex;
+    flex-direction: column;
+}
+#disconnected {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 220, 220, 0.5);
+    z-index: 100500;
+}
+.center_warn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 1);
+    color: #000;
+    font-size: 1.5em;
+    white-space: nowrap;
+    padding: 1em;
+    border-radius: 1em;
+    text-align: center;
+}
+
+.form-table {
+    border: none;
+    padding: 0.1875em;
+}
+.falsic {
+    display: inline;
+}
+.falsic:after {
+    content: "Ƒ"; 
+    content: "F"; 
+} 
+.form-table td {
+    padding: 0.5em 0;
+    width: 50%;
+    vertical-align: top;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+{
+    opacity: 0;
+}
+
+
+.my-navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.50em 3.15em 2em;
+    position: relative;
+}
+
+
+.my-navbar__left{
+    display: flex;
+    align-items: center;
+}
+.my-navbar__logo{
+    width: 10.6875em;
+    height: auto;
+    transform: translate3d(0,0,0);
+}
+.my-navbar__rules{
+    font-size: 1.125em;
+    line-height: 1.56;
+    letter-spacing: 0.001em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: 400;
+    margin-left: 3.333em;
+    transition: 0.4s color;
+}
+.game-name{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.125em;
+    letter-spacing: 0.007em;
+    padding-top: 0.2em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.game-name a{
+    text-transform: none;
+    font-weight: 400;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.4s color;
+    border-bottom: 0.0625em solid #333333;
+    margin-right: 2.7em;
+    margin-left: 0.1em;
+}
+.my-navbar__rules:hover,
+.game-name a:hover{
+    color: #00FFFF;
+}
+.my-navbar__right{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.125em; 
+}
+.my-navbar__right a{
+    color: #00FFFF; 
+    margin-left: 0.4em;
+    transition: 0.4s border-color;
+    border-bottom: solid 0.0625em transparent;
+}
+.my-navbar__right button{
+    text-transform: uppercase;
+    background: none;
+    color: #00FFFF;
+    border: none;
+    margin-left: 2.7em;
+    transition: 0.4s border-color;
+    cursor: pointer;
+    border-bottom: solid 0.0625em transparent;
+}
+.my-navbar__right button:hover,
+.my-navbar__right a:hover{
+    border-bottom-color: #00FFFF;
+}
+
+ 
+.self-name {
+    font-weight: bold;
+}
+
+ 
+.button{   
+    display: block; 
+    position: relative;
+    font-size: 1.375em;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    min-width: 13.4em;
+}
+.button::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #43A8B1 8.77%, #3FCACB 45.3%, #3ED1D1 52.83%, #00C2C2 93.37%);
+    transition: 0.6s opacity;
+    opacity: 1;
+    border-radius: 0.4545em;
+}
+.button:focus-within>span,
+.button:hover>span,
+.button:active>span{
+    border-color: #198584;  
+    box-shadow: none;
+}
+.button>span{ 
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 3.272727em;
+    letter-spacing: 0.06em; 
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.2;
+    position: relative;
+    transition: 0.4s box-shadow, 0.8s border-color;  
+    border-radius: 0.4545em;
+    color: #fff;
+    border: 0.1364em solid transparent;   
+    box-shadow: 0.0909em 0.0909em 0.5909em 0.0454545em #15B6B7;
+}
+.button:focus-within::before,
+.button:hover::before,
+.button:active::before{
+    opacity: 0;
+}
+
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  width: 15.625em; /* Set a default minimum width */
+  margin-left: -7.8125em; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 0.125em; /* Rounded borders */
+  padding: 1em; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 1.875em; 
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 1.875em; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 1.875em; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 1.875em; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 1.875em; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
+::-webkit-scrollbar {
+    width: 0.625em;
+    background: #1f4251; 
+}
+.modal ::-webkit-scrollbar {
+    border-radius: 2em;    
+}
+::-webkit-scrollbar-thumb {   
+    background: #95ECEB;
+    border-radius: 2em;
+}
+::-webkit-scrollbar-track { 
+    background-color: transparent;
+}
+
+
+
+.rules-tabs{
+    position: absolute;
+    top: 4.8em;
+    left: 10.5em;
+    display: flex;
+    align-items: flex-end;
+}
+.rules-tab{
+    font-size: 1.375em;
+    line-height: 1.45; 
+    letter-spacing: 0.055em;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #AFAFAF;
+    margin-right: 2.2727em;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.4s color;
+    border-bottom: solid 0.0625em transparent;
+    padding-bottom: 0.4em;
+}
+.rules-tab:hover{
+    color: #5AC3FF;
+}
+.rules-tab.active{
+    color: #5AC3FF;
+    border-bottom-color: #5AC3FF;
+}
+.rules-tab:last-child{
+    margin-right: 0;
+}
+.rules-tab-content{
+    display: none;
+    color: #F9F9F9;
+    padding-top: 0.6em;
+}
+.rules-tab-content p{
+    line-height: 1.3125;
+    margin-bottom: 0.625em;
+    letter-spacing: -0.019em;
+}
+.rules-tab-content a{
+    color: #5AC3FF;
+}
+.rules-tab-title{
+    font-weight: 600;
+    font-size: 1.375em;
+    line-height: 1.45; 
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.9091em;
+}
+.rules-tab-subtitle{
+    font-weight: 700;
+    font-size: 1.125em;
+    line-height: 1.56; 
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+}
+.rules-tab-content .mb-20,
+.mb-20{
+    margin-bottom: 1.25em;
+}
+.rules-tab-content .mb-0,
+.mb-0{
+    margin-bottom: 0em;
+} 
+.rules-tab-content li{
+    padding-left: 1.5em;
+    letter-spacing: -0.019em;
+    position: relative;
+}
+.rules-tab-content li::before{
+    content: "";
+    position: absolute;
+    left: 0.63em;
+    top: 0.5em;
+    width: 0.25em;
+    height: 0.25em;
+    display: block;
+    border-radius: 100%;
+    background: #F9F9F9;
+}
+.rules-image-wrapper{
+    text-align: center;
+    margin-bottom: 1.25em;
+}
+.rules-image{
+    height: auto;
+    width: 43.1875em;
+}
+
+.gloss-el{
+    border-bottom: solid 0.0625em rgba(249, 249, 249, 0.3);
+    margin-bottom: 1.3em;
+}
+.gloss-el__title{
+    font-weight: 600;
+    font-size: 1.375em;
+    line-height: 1.45; 
+    letter-spacing: 0.059em;
+    text-transform: uppercase;
+    padding: 0em 0em 0.9em 2.25em;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+}
+.gloss-el__title::before{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0.49em;
+    top: 0.27em;
+    transition: 0.4s transform;
+    width: 0.54em;
+    height: 0.682em;
+    background: url(images/glos.svg) no-repeat center / 100% 100%;
+}
+.gloss-el__title.active::before{
+    transform: rotate(90deg);
+}
+.gloss-el__content{
+    display: none;
+    padding: 0em 0em 1em 3.09375em;
+}
+
+.rules-tab-content .gloss-el__content ul{
+    margin: 0.4375em 0 0.9375em;
+}
+.rules-tab-content .gloss-el__content li{
+    padding: 0.25em 0 0.25em 3.125em;
+    margin-bottom: 0.4375em;
+}
+.rules-tab-content .gloss-el__content li:last-child{
+    margin-bottom: 0;
+}
+.rules-tab-content .gloss-el__content li::before{
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.88em;
+    height: 1.88em;
+    background: linear-gradient(90deg, #43A8B1 8.77%, #3FCACB 45.3%, #3ED1D1 52.83%, #00C2C2 93.37%);
+    border: 0.2em solid #95ECEB;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
