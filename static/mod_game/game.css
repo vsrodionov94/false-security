@@ -356,14 +356,11 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url(/static/images/card_def_mini_ico.svg);
 }
 .card_offence .card__body-status{
     background: #4A0004;
 }
-.card_offence .card__body-status::after{
-    background-image: url(/static/images/card_ofen_mini_ico.svg);
-}
+
 .card_accident .card__body-status{
     padding: 0.1em 0.7em;
     letter-spacing: 0;
@@ -371,10 +368,174 @@
 .card_accident .card__body-status{
     background: #01295F;
 }
-.card_accident .card__body-status::after{
-    background-image: url(/static/images/card_acc_mini_ico.svg);
+
+.card__icon {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3.3em;
+    height: 3.3em;
+    right: 0.7272em;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.card__img_1{
+    background-image: url(/static/images/icons/icon_1.svg);
     right: 0.5em;
 }
+.card__img_2 {
+    background-image: url(/static/images/icons/icon_2.svg);
+    right: 0.5em;
+}
+.card__img_3 {
+    background-image: url(/static/images/icons/icon_3.svg);
+    right: 0.5em;
+}
+
+.card__img_4{
+    background-image: url(/static/images/icons/icon_4.svg);
+    right: 0.5em;
+}
+
+.card__img_5{
+    background-image: url(/static/images/icons/icon_5.svg);
+    right: 0.5em;
+}
+
+.card__img_6{
+    background-image: url(/static/images/icons/icon_6.svg);
+    right: 0.5em;
+}
+
+.card__img_7{
+    background-image: url(/static/images/icons/icon_7.svg);
+    right: 0.5em;
+}
+
+.card__img_8{
+    background-image: url(/static/images/icons/icon_8.svg);
+    right: 0.5em;
+}
+
+.card__img_9{
+    background-image: url(/static/images/icons/icon_9.svg);
+    right: 0.5em;
+}
+
+.card__img_10{
+    background-image: url(/static/images/icons/icon_10.svg);
+    right: 0.5em;
+}
+
+.card__img_11{
+    background-image: url(/static/images/icons/icon_11.svg);
+    right: 0.5em;
+}
+
+.card__img_12{
+    background-image: url(/static/images/icons/icon_12.svg);
+    right: 0.5em;
+}
+
+.card__img_13{
+    background-image: url(/static/images/icons/icon_13.svg);
+    right: 0.5em;
+}
+
+.card__img_14{
+    background-image: url(/static/images/icons/icon_14.svg);
+    right: 0.5em;
+}
+
+.card__img_15{
+    background-image: url(/static/images/icons/icon_15.svg);
+    right: 0.5em;
+}
+
+.card__img_16{
+    background-image: url(/static/images/icons/icon_16.svg);
+    right: 0.5em;
+}
+
+.card__img_17{
+    background-image: url(/static/images/icons/icon_17.svg);
+    right: 0.5em;
+}
+
+.card__img_18{
+    background-image: url(/static/images/icons/icon_18.svg);
+    right: 0.5em;
+}
+
+.card__img_19{
+    background-image: url(/static/images/icons/icon_19.svg);
+    right: 0.5em;
+}
+
+.card__img_20{
+    background-image: url(/static/images/icons/icon_20.svg);
+    right: 0.5em;
+}
+
+.card__img_21{
+    background-image: url(/static/images/icons/icon_21.svg);
+    right: 0.5em;
+}
+
+.card__img_22{
+    background-image: url(/static/images/icons/icon_22.svg);
+    right: 0.5em;
+}
+
+.card__img_23{
+    background-image: url(/static/images/icons/icon_23.svg);
+    right: 0.5em;
+}
+
+.card__img_24{
+    background-image: url(/static/images/icons/icon_24.svg);
+    right: 0.5em;
+}
+
+.card__img_25{
+    background-image: url(/static/images/icons/icon_25.svg);
+    right: 0.5em;
+}
+
+.card__img_26{
+    background-image: url(/static/images/icons/icon_26.svg);
+    right: 0.5em;
+}
+
+.card__img_27{
+    background-image: url(/static/images/icons/icon_27.svg);
+    right: 0.5em;
+}
+
+.card__img_28{
+    background-image: url(/static/images/icons/icon_28.svg);
+    right: 0.5em;
+}
+
+.card__img_29{
+    background-image: url(/static/images/icons/icon_29.svg);
+    right: 0.5em;
+}
+
+.card__img_30{
+    background-image: url(/static/images/icons/icon_30.svg);
+    right: 0.5em;
+}
+
+.card__img_31{
+    background-image: url(/static/images/icons/icon_31.svg);
+    right: 0.5em;
+}
+
 .card__body-image{
     background-position: center;
     background-size: cover;
@@ -403,6 +564,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+
 }
 .card__body-image>div.card_play{
     top: 0;
@@ -411,21 +574,10 @@
     opacity: 0;
     transition: 0.5s opacity;
 }
-.card:hover .card__body-image>div.card_play{
+.card:hover .card__body-image>div.card_play {
     opacity: 1;
 }
-.card__body-image>div>div{
-    margin: 0 0.3125em;
-    width: 2em;
-    height: 2em;
-    border-radius: 100%;
-    background: linear-gradient( 90deg , #43A8B1 8.77%, #3FCACB 45.3%, #3ED1D1 52.83%, #00C2C2 93.37%);
-    border: 0.15em solid #95ECEB;
-}
-.card__body-image>div>div.bright{
-    border-color: #F9F9F9;
-    box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.7);
-}
+
 .card__body-bottom{
     flex-grow: 1;
     height: 4.9em;
@@ -435,7 +587,7 @@
     padding: 0.4375em 0.9375em 0.9375em 0.9375em;
 }
 .card_defence .card__body-bottom{
-    padding-top: 1.1em;
+    padding-top: 0.9em;
 }
 .card__body-description{
     font-weight: 600;
@@ -443,17 +595,16 @@
     line-height: 1.3;
     text-align: center; 
     color: #F2F2F2;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .card_defence .card__body-description{
     color: #032D3D;
     font-size: 0.6875em;
     letter-spacing: -0.04em;
     padding-top: 0.6em;
-    line-height: 1.364;
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
+    line-height: 1.4;
+    text-align: center; 
 }
 .card_more_wrapper {
     margin-top: auto;
@@ -531,10 +682,155 @@
 
 
 
-
 .against {
-    
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    transform: translateY(50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.against__icon {
+    margin: 0 0.3125em;
+    width: 2em;
+    height: 2em;
+    border-radius: 100%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.bright{
+    border-color: #F9F9F9;
+    box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.7);
+}
+
+.against__icon_1 {
+    background-image: url('./../images/mini_icons/icon_30_1.svg');
+}
+
+.against__icon_2 {
+    background-image: url('../images/mini_icons/icon_30_2.svg');
+}
+
+.against__icon_3 {
+    background-image: url('../images/mini_icons/icon_30_3.svg');
+}
+
+.against__icon_4 {
+    background-image: url('./../images/mini_icons/icon_30_4.svg');
+}
+
+.against__icon_5 {
+    background-image: url('../images/mini_icons/icon_30_5.svg');
+}
+
+.against__icon_6 {
+    background-image: url('../images/mini_icons/icon_30_6.svg');
+}
+
+.against__icon_7 {
+    background-image: url('./../images/mini_icons/icon_30_7.svg');
+}
+
+.against__icon_8 {
+    background-image: url('../images/mini_icons/icon_30_8.svg');
+}
+
+.against__icon_9 {
+    background-image: url('../images/mini_icons/icon_30_9.svg');
+}
+
+.against__icon_10 {
+    background-image: url('../images/mini_icons/icon_30_10.svg');
+}
+
+.against__icon_11 {
+    background-image: url('./../images/mini_icons/icon_30_11.svg');
+}
+
+.against__icon_12 {
+    background-image: url('../images/mini_icons/icon_30_12.svg');
+}
+
+.against__icon_13 {
+    background-image: url('../images/mini_icons/icon_30_13.svg');
+}
+
+.against__icon_14 {
+    background-image: url('./../images/mini_icons/icon_30_14.svg');
+}
+
+.against__icon_15 {
+    background-image: url('../images/mini_icons/icon_30_15.svg');
+}
+
+.against__icon_16 {
+    background-image: url('../images/mini_icons/icon_30_16.svg');
+}
+
+.against__icon_17 {
+    background-image: url('./../images/mini_icons/icon_30_17.svg');
+}
+
+.against__icon_18 {
+    background-image: url('../images/mini_icons/icon_30_18.svg');
+}
+
+.against__icon_19 {
+    background-image: url('../images/mini_icons/icon_30_19.svg');
+}
+
+.against__icon_20 {
+    background-image: url('../images/mini_icons/icon_30_20.svg');
+}
+
+.against__icon_21 {
+    background-image: url('./../images/mini_icons/icon_30_21.svg');
+}
+
+.against__icon_22 {
+    background-image: url('../images/mini_icons/icon_30_22.svg');
+}
+
+.against__icon_23 {
+    background-image: url('../images/mini_icons/icon_30_23.svg');
+}
+
+.against__icon_24 {
+    background-image: url('./../images/mini_icons/icon_30_24.svg');
+}
+
+.against__icon_25 {
+    background-image: url('../images/mini_icons/icon_30_25.svg');
+}
+
+.against__icon_26 {
+    background-image: url('../images/mini_icons/icon_30_26.svg');
+}
+
+.against__icon_27 {
+    background-image: url('./../images/mini_icons/icon_30_27.svg');
+}
+
+.against__icon_28 {
+    background-image: url('../images/mini_icons/icon_30_28.svg');
+}
+
+.against__icon_29 {
+    background-image: url('../images/mini_icons/icon_30_29.svg');
+}
+
+.against__icon_30 {
+    background-image: url('../images/mini_icons/icon_30_30.svg');
+}
+
+.against__icon_31 {
+    background-image: url('../images/mini_icons/icon_30_31.svg');
+}
+
 
 
 .attack {
@@ -665,10 +961,6 @@
     background: linear-gradient(90deg, #e0bb96, #b38797);
 }
 
- 
-
-
-
 .mcd{
     display: flex;
     justify-content: space-between;
@@ -720,11 +1012,12 @@
     align-items: flex-start;
 }
 .mcd__round{
-    width: 2.5em;
-    height: 2.5em;
+    width: 3em;
+    height: 3em;
     border-radius: 100%;
-    background: linear-gradient( 90deg , #43A8B1 8.77%, #3FCACB 45.3%, #3ED1D1 52.83%, #00C2C2 93.37%);
-    border: 0.125em solid #95ECEB;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 .mcd__right-content{
     width: 12.55em;

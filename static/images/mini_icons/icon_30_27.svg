@@ -1,0 +1,92 @@
+<svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 15.2598C0 6.97549 6.71573 0.259766 15 0.259766V0.259766C23.2843 0.259766 30 6.97549 30 15.2598V15.2598C30 23.544 23.2843 30.2598 15 30.2598V30.2598C6.71573 30.2598 0 23.544 0 15.2598V15.2598Z" fill="url(#paint0_linear)"/>
+<rect x="9.44727" y="9.72217" width="11.104" height="11.104" rx="1" fill="black"/>
+<g clip-path="url(#clip0)">
+<circle r="1.2243" transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 18.4476 23.0965)" fill="black"/>
+<line y1="-0.4" x2="4.8364" y2="-0.4" transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 18.0527 23.0635)" stroke="black" stroke-width="0.8"/>
+<circle r="1.2243" transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 14.9984 23.0965)" fill="black"/>
+<line y1="-0.4" x2="4.8364" y2="-0.4" transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 14.6035 23.0635)" stroke="black" stroke-width="0.8"/>
+<circle r="1.2243" transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 11.5511 23.0965)" fill="black"/>
+<line y1="-0.4" x2="4.8364" y2="-0.4" transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 11.1562 23.0635)" stroke="black" stroke-width="0.8"/>
+</g>
+<g clip-path="url(#clip1)">
+<circle cx="18.4476" cy="7.42352" r="1.2243" transform="rotate(90 18.4476 7.42352)" fill="black"/>
+<line x1="18.4527" y1="7.45654" x2="18.4527" y2="12.2929" stroke="black" stroke-width="0.8"/>
+<circle cx="14.9984" cy="7.42352" r="1.2243" transform="rotate(90 14.9984 7.42352)" fill="black"/>
+<line x1="15.0035" y1="7.45654" x2="15.0035" y2="12.2929" stroke="black" stroke-width="0.8"/>
+<circle cx="11.5511" cy="7.42352" r="1.2243" transform="rotate(90 11.5511 7.42352)" fill="black"/>
+<line x1="11.5563" y1="7.45654" x2="11.5562" y2="12.2929" stroke="black" stroke-width="0.8"/>
+</g>
+<g clip-path="url(#clip2)">
+<circle cx="6.67156" cy="12.2809" r="1.2243" fill="black"/>
+<line x1="6.70508" y1="12.2758" x2="11.5415" y2="12.2758" stroke="black" stroke-width="0.8"/>
+<circle cx="6.67156" cy="15.7297" r="1.2243" fill="black"/>
+<line x1="6.70508" y1="15.7245" x2="11.5415" y2="15.7245" stroke="black" stroke-width="0.8"/>
+<circle cx="6.67156" cy="19.1779" r="1.2243" fill="black"/>
+<line x1="6.70508" y1="19.1728" x2="11.5415" y2="19.1728" stroke="black" stroke-width="0.8"/>
+</g>
+<g clip-path="url(#clip3)">
+<circle r="1.2243" transform="matrix(-1 0 0 1 23.3265 12.2809)" fill="black"/>
+<line y1="-0.4" x2="4.8364" y2="-0.4" transform="matrix(-1 0 0 1 23.293 12.6758)" stroke="black" stroke-width="0.8"/>
+<circle r="1.2243" transform="matrix(-1 0 0 1 23.3265 15.7297)" fill="black"/>
+<line y1="-0.4" x2="4.8364" y2="-0.4" transform="matrix(-1 0 0 1 23.293 16.1245)" stroke="black" stroke-width="0.8"/>
+<circle r="1.2243" transform="matrix(-1 0 0 1 23.3265 19.1779)" fill="black"/>
+<line y1="-0.4" x2="4.8364" y2="-0.4" transform="matrix(-1 0 0 1 23.293 19.5728)" stroke="black" stroke-width="0.8"/>
+</g>
+<circle cx="12.2055" cy="12.4233" r="0.70748" fill="url(#paint1_linear)"/>
+<circle cx="16.1801" cy="18.6611" r="0.70748" fill="url(#paint2_linear)"/>
+<circle cx="14.2915" cy="12.4233" r="0.70748" fill="url(#paint3_linear)"/>
+<circle cx="18.268" cy="18.6611" r="0.70748" fill="url(#paint4_linear)"/>
+<line x1="14.0332" y1="18.7266" x2="11.7936" y2="18.7266" stroke="url(#paint5_linear)" stroke-linecap="round"/>
+<path d="M15 28.2598C7.8203 28.2598 2 22.4395 2 15.2598H-2C-2 24.6486 5.61116 32.2598 15 32.2598V28.2598ZM28 15.2598C28 22.4395 22.1797 28.2598 15 28.2598V32.2598C24.3888 32.2598 32 24.6486 32 15.2598H28ZM15 2.25977C22.1797 2.25977 28 8.08006 28 15.2598H32C32 5.87092 24.3888 -1.74023 15 -1.74023V2.25977ZM15 -1.74023C5.61116 -1.74023 -2 5.87092 -2 15.2598H2C2 8.08006 7.8203 2.25977 15 2.25977V-1.74023Z" fill="#95ECEB"/>
+<defs>
+<linearGradient id="paint0_linear" x1="2.63158" y1="30.2599" x2="28.0117" y2="30.2599" gradientUnits="userSpaceOnUse">
+<stop stop-color="#43A8B1"/>
+<stop offset="0.431827" stop-color="#3FCACB"/>
+<stop offset="0.520833" stop-color="#3ED1D1"/>
+<stop offset="1" stop-color="#00C2C2"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x1="11.6222" y1="13.1308" x2="12.8192" y2="13.1308" gradientUnits="userSpaceOnUse">
+<stop stop-color="#43A8B1"/>
+<stop offset="0.431827" stop-color="#3FCACB"/>
+<stop offset="0.520833" stop-color="#3ED1D1"/>
+<stop offset="1" stop-color="#00C2C2"/>
+</linearGradient>
+<linearGradient id="paint2_linear" x1="15.5968" y1="19.3686" x2="16.7938" y2="19.3686" gradientUnits="userSpaceOnUse">
+<stop stop-color="#43A8B1"/>
+<stop offset="0.431827" stop-color="#3FCACB"/>
+<stop offset="0.520833" stop-color="#3ED1D1"/>
+<stop offset="1" stop-color="#00C2C2"/>
+</linearGradient>
+<linearGradient id="paint3_linear" x1="13.7081" y1="13.1308" x2="14.9052" y2="13.1308" gradientUnits="userSpaceOnUse">
+<stop stop-color="#43A8B1"/>
+<stop offset="0.431827" stop-color="#3FCACB"/>
+<stop offset="0.520833" stop-color="#3ED1D1"/>
+<stop offset="1" stop-color="#00C2C2"/>
+</linearGradient>
+<linearGradient id="paint4_linear" x1="17.6847" y1="19.3686" x2="18.8817" y2="19.3686" gradientUnits="userSpaceOnUse">
+<stop stop-color="#43A8B1"/>
+<stop offset="0.431827" stop-color="#3FCACB"/>
+<stop offset="0.520833" stop-color="#3ED1D1"/>
+<stop offset="1" stop-color="#00C2C2"/>
+</linearGradient>
+<linearGradient id="paint5_linear" x1="14.249" y1="17.2266" x2="11.5083" y2="17.2266" gradientUnits="userSpaceOnUse">
+<stop stop-color="#43A8B1"/>
+<stop offset="0.431827" stop-color="#3FCACB"/>
+<stop offset="0.520833" stop-color="#3ED1D1"/>
+<stop offset="1" stop-color="#00C2C2"/>
+</linearGradient>
+<clipPath id="clip0">
+<rect width="4" height="9.34579" fill="white" transform="matrix(1.19249e-08 -1 -1 -1.19249e-08 19.6719 24.3208)"/>
+</clipPath>
+<clipPath id="clip1">
+<rect width="4" height="9.34579" fill="white" transform="translate(19.6719 6.19922) rotate(90)"/>
+</clipPath>
+<clipPath id="clip2">
+<rect width="4" height="9.34579" fill="white" transform="translate(5.44727 11.0566)"/>
+</clipPath>
+<clipPath id="clip3">
+<rect width="4" height="9.34579" fill="white" transform="matrix(-1 0 0 1 24.5508 11.0566)"/>
+</clipPath>
+</defs>
+</svg>

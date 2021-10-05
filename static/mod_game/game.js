@@ -74,6 +74,9 @@ Vue.component('card', {
             }
             return type_cls + ' ' + this.cls + ' card';
         },
+        img_cls: function() {
+            return `card__icon card__img_${this.card.id}`;
+        },
         card_type: function () {
             let type_card = ""; 
             switch (this.card.type) {
@@ -92,7 +95,7 @@ Vue.component('card', {
             return type_card;
         },
         card_description: function () {
-            return this.card.pop_up_text && this.card.pop_up_text.length > 50 ? this.card.pop_up_text.substring(0, 50) + '...' : this.card.pop_up_text;
+            return this.card.pop_up_text;
         }
     }, 
     methods: {
@@ -111,7 +114,10 @@ Vue.component('card', {
         },
         popup: function () { 
             cardBig.show(this.card.id);
-        } 
+        },
+        get_against_cls: function (id) {
+            return `against__icon against__icon_${id}`;
+        },
     },
     template: `
     <div :class="css_cls" @click="clicked_big">
@@ -121,15 +127,18 @@ Vue.component('card', {
                 <div class="card_falsics" v-if="tiny || dmg_value">{{dmg_value}}<span class="falsic"></span></div>
                 <b v-html="card.name"></b>
             </div>
-            <div class="card__body-status">{{card_type}}</div>
+            <div class="card__body-status">
+                <p>{{card_type}}</p>
+                <div :class="img_cls"></div>
+            </div>
             <div class="card__body-image">
                 <div class="card_more card_play" @click="clicked" v-if="can_play">
                     Сыграть карту
                 </div> 
-                <div>
-                    <div class="bright"></div>
-                    <div></div>
-                    <div></div>
+                <div class="against">
+                    <div v-for="elem in card.def_against" :key="elem.id">
+                        <div :class="get_against_cls(elem.other_card)"></div>
+                    </div>
                 </div>
             </div>
 
@@ -139,20 +148,7 @@ Vue.component('card', {
                     <div class="card_more" @click="popup">
                         Подробнее
                     </div>           
-                </div>   
-     
-
-                <!--        
-                <div v-if="card.off_against">
-                    <div class="against" v-for="elem in card.off_against" :key="elem.id">
-                        {{get_card(elem.other_card).name}} -{{elem.value}}<br/>
-                    </div>
                 </div>
-                <div v-if="(card.def_against && !tiny)">
-                    <div class="against" v-for="elem in card.def_against" :key="elem.id">
-                        {{get_card(elem.other_card).name}} +{{elem.value}}<br/>
-                    </div>
-                </div>    -->
             </div> 
         </div>
     </div>
@@ -196,17 +192,20 @@ Vue.component('cardbig', {
 
                             <div :class="css_cls+' card'">
                                 <div class="card__body">
-
+                                        
                                     <div class="card__body-top">
                                         <div class="card_falsics" v-if="dmg_value">{{dmg_value}}<span class="falsic"></span></div>
                                         <b>{{name}}</b>
                                     </div>
-                                    <div class="card__body-status">{{card_type}}</div>
+                                    <div class="card__body-status">
+                                        <p>{{card_type}}</p>
+                                        <div :class="img_cls(card.id)"></div>
+                                    </div>
                                     <div class="card__body-image"> 
-                                        <div>
-                                            <div></div>
-                                            <div></div>
-                                            <div></div>
+                                        <div class="against">
+                                            <div v-for="elem in card.def_against" :key="elem.id">
+                                                <div :class="get_against_cls(elem.other_card)"></div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -222,38 +221,24 @@ Vue.component('cardbig', {
                             </div>
 
                             <div class="mcd__right">
-                                <div class="mcd__right-el">
-                                    <div class="mcd__round"></div>
+                                <div v-if="card.def_against" class="mcd__right-el" v-for="elem in card.def_against" :key="elem.other_card">
+                                    <div :class="get_against_icon_class(elem.other_card)"></div>
                                     <div class="mcd__right-content">
-                                        <div class="mcd__right-title">Кража ноутбука</div>
-                                        <div class="mcd__right-weight">Вес: +3FƑ</div>
-                                        <div class="mcd__right-text">Защищает от карты<br> атаки “Кража ноутбука”</div>
+                                        <div class="mcd__right-title">{{get_card(elem.other_card).name}}</div>
+                                        <div class="mcd__right-weight">Вес: +{{elem.value}}FƑ</div>
+                                        <div class="mcd__right-text">Защищает от карты<br> атаки “{{get_card(elem.other_card).name}}”</div>
                                     </div>
-                                </div> 
-                                <div class="mcd__right-el">
-                                    <div class="mcd__round"></div>
+                                </div>
+                                <div v-if="card.off_against" class="mcd__right-el" v-for="elem in card.off_against" :key="elem.other_card">
+                                    <div :class="get_against_icon_class(elem.other_card)"></div>
                                     <div class="mcd__right-content">
-                                        <div class="mcd__right-title">Кража ноутбука</div>
-                                        <div class="mcd__right-weight">Вес: +3FƑ</div>
-                                        <div class="mcd__right-text">Защищает от карты<br> атаки “Кража ноутбука”</div>
+                                        <div class="mcd__right-title">{{get_card(elem.other_card).name}}</div>
+                                        <div class="mcd__right-weight">Вес: +{{elem.value}}FƑ</div>
+                                        <div class="mcd__right-text">Защищает от карты<br> атаки “{{get_card(elem.other_card).name}}”</div>
                                     </div>
-                                </div> 
-                                <div class="mcd__right-el">
-                                    <div class="mcd__round"></div>
-                                    <div class="mcd__right-content">
-                                        <div class="mcd__right-title">Кража ноутбука</div>
-                                        <div class="mcd__right-weight">Вес: +3FƑ</div>
-                                        <div class="mcd__right-text">Защищает от карты<br> атаки “Кража ноутбука”</div>
-                                    </div>
-                                </div>  
+                                </div>
                             </div>  
-
-
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -265,6 +250,9 @@ Vue.component('cardbig', {
         socket.on('card', (data) => { 
             full_cards[data.value.id] = data.value; 
             self.onload();             
+        });
+        socket.on('cards', (data) => {
+            this.cards = data.value;
         });
     },
     computed: {
@@ -297,7 +285,7 @@ Vue.component('cardbig', {
                 this.text = card.pop_up_text;
                 this.url = card.pop_up_url;
                 this.loaded = true;
-                this.card_description = this.card.pop_up_text && this.card.pop_up_text.length > 50 ? this.card.pop_up_text.substring(0, 50) + '...' : this.card.pop_up_text;
+                this.card_description = this.card.pop_up_text;
                 switch (card.type) {
                     case 1:
                         this.card_type = 'Карта атаки';
@@ -312,6 +300,18 @@ Vue.component('cardbig', {
                         this.card_type = 'Карта денег';
                 }
             }
+        },
+        get_card: function (card_id) {
+            return this.cards[card_id];
+        },
+        get_against_icon_class: function (card_id) {
+            return `mcd__round against__icon_${card_id}`;
+        },
+        img_cls: function(id) {
+            return `card__icon card__img_${id}`;
+        },
+        get_against_cls: function (id) {
+            return `against__icon against__icon_${id}`;
         },
         show: function (id) { 
             this.loaded = false;

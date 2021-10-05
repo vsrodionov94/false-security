@@ -1,0 +1,17 @@
+<svg width="35" height="36" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<path d="M34 18.2598C34 27.3725 26.6127 34.7598 17.5 34.7598C8.3873 34.7598 1 27.3725 1 18.2598C1 9.14707 8.3873 1.75977 17.5 1.75977C26.6127 1.75977 34 9.14707 34 18.2598Z" fill="black" stroke="#95ECEB" stroke-width="2"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17.3163 23.47C21.0302 23.47 24.0408 20.4594 24.0408 16.7455C24.0408 13.0317 21.0302 10.021 17.3163 10.021C13.6025 10.021 10.5918 13.0317 10.5918 16.7455C10.5918 18.2453 11.0828 19.6304 11.9128 20.7489L11.8983 20.7406L10.0566 24.5428L14.1718 22.691C15.1102 23.1884 16.1803 23.47 17.3163 23.47Z" fill="#37FFF2"/>
+<path d="M13.3223 14.3892H21.4374" stroke="black" stroke-linecap="round"/>
+<path d="M13.3222 16.5938L17.1837 16.5938" stroke="black" stroke-linecap="round"/>
+<path d="M18.244 19.2779C17.3718 19.2779 16.6646 19.985 16.6646 20.8573V24.0387C16.6646 24.911 17.3718 25.6181 18.244 25.6181H22.4858C23.3581 25.6181 24.0653 24.911 24.0653 24.0387V20.8573C24.0653 19.985 23.3581 19.2779 22.4858 19.2779H18.244Z" fill="#37FFF2" stroke="black" stroke-width="1.03795" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.8848 18.9147C17.8848 17.8322 18.8767 16.9546 20.1003 16.9546C21.3238 16.9546 22.3157 17.8322 22.3157 18.9147" stroke="black" stroke-width="0.980056" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.3926 19.0893C19.3926 18.6988 19.7091 18.3823 20.0995 18.3823C20.4899 18.3823 20.8065 18.6988 20.8065 19.0893" stroke="black" stroke-width="0.980056" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.3647 22.2036C20.5111 22.2036 20.6298 22.3223 20.6298 22.4687C20.6298 22.6151 20.5111 22.7338 20.3647 22.7338C20.2183 22.7338 20.0996 22.6151 20.0996 22.4687C20.0996 22.3223 20.2183 22.2036 20.3647 22.2036" stroke="black" stroke-width="1.06045" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="35" height="35" fill="white" transform="translate(0 0.759766)"/>
+</clipPath>
+</defs>
+</svg>
