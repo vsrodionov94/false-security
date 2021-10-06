@@ -26,7 +26,8 @@ Vue.component('card', {
         'tiny',
         'vs',
         'can_play',
-        'cur_damage', 
+        'cur_damage',
+        'cur_played_card',
     ], 
     computed: {
         card: function () {
@@ -77,6 +78,9 @@ Vue.component('card', {
         img_cls: function() {
             return `card__icon card__img_${this.card.id}`;
         },
+        icon_cls: function () {
+            return `card__big-icon card__img_${this.card.id}`
+        },
         card_type: function () {
             let type_card = ""; 
             switch (this.card.type) {
@@ -116,6 +120,7 @@ Vue.component('card', {
             cardBig.show(this.card.id);
         },
         get_against_cls: function (id) {
+            if (id === this.cur_played_card) return `against__icon against__icon_${id} bright`;
             return `against__icon against__icon_${id}`;
         },
     },
@@ -136,8 +141,7 @@ Vue.component('card', {
                     Сыграть карту
                 </div> 
                 <div class="against">
-                    <div v-for="elem in card.def_against" :key="elem.id">
-                        <div :class="get_against_cls(elem.other_card)"></div>
+                    <div :class="get_against_cls(elem.other_card)" v-for="elem in card.def_against" :key="elem.id">
                     </div>
                 </div>
             </div>
@@ -151,6 +155,7 @@ Vue.component('card', {
                 </div>
             </div> 
         </div>
+        <div :class="icon_cls"></div>
     </div>
 `
 }); 
@@ -203,8 +208,7 @@ Vue.component('cardbig', {
                                     </div>
                                     <div class="card__body-image"> 
                                         <div class="against">
-                                            <div v-for="elem in card.def_against" :key="elem.id">
-                                                <div :class="get_against_cls(elem.other_card)"></div>
+                                            <div :class="get_against_cls(elem.other_card)" v-for="elem in card.def_against" :key="elem.id">
                                             </div>
                                         </div>
                                     </div>
@@ -222,14 +226,6 @@ Vue.component('cardbig', {
 
                             <div class="mcd__right">
                                 <div v-if="card.def_against" class="mcd__right-el" v-for="elem in card.def_against" :key="elem.other_card">
-                                    <div :class="get_against_icon_class(elem.other_card)"></div>
-                                    <div class="mcd__right-content">
-                                        <div class="mcd__right-title">{{get_card(elem.other_card).name}}</div>
-                                        <div class="mcd__right-weight">Вес: +{{elem.value}}FƑ</div>
-                                        <div class="mcd__right-text">Защищает от карты<br> атаки “{{get_card(elem.other_card).name}}”</div>
-                                    </div>
-                                </div>
-                                <div v-if="card.off_against" class="mcd__right-el" v-for="elem in card.off_against" :key="elem.other_card">
                                     <div :class="get_against_icon_class(elem.other_card)"></div>
                                     <div class="mcd__right-content">
                                         <div class="mcd__right-title">{{get_card(elem.other_card).name}}</div>
@@ -311,6 +307,7 @@ Vue.component('cardbig', {
             return `card__icon card__img_${id}`;
         },
         get_against_cls: function (id) {
+            if (id === this.cur_played_card) return `against__icon against__icon_${id} bright`;
             return `against__icon against__icon_${id}`;
         },
         show: function (id) { 

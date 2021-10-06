@@ -91,8 +91,8 @@
             <div class="window-row">
                 <div class="hand">
                     <card v-for="card in hand" :cards="cards" :card_id="card.id" tiny="" :cls="(card.can_play ? 'card_active' : 'card_inactive')" :can_play="card.can_play"
-                          @clicked="card_clicked"></card>
-                    <card v-if="on_defence" can_play="true" :cards="cards" :card_id="-1" tiny="" cls="card_active" @clicked="card_clicked" :cur_damage="cur_damage"></card>
+                          @clicked="card_clicked" :cur_played_card="attacking_card_id"></card>
+                    <card v-if="on_defence" can_play="true" :cards="cards" :card_id="-1" tiny="" cls="card_active" @clicked="card_clicked" :cur_damage="cur_damage" :cur_played_card="attacking_card_id"></card>
                 </div>
             </div>
         </div>
@@ -224,9 +224,7 @@
                     }
                     this.on_defence = my_battle && my_battle.defender === this.self_player && !my_battle.is_complete && my_battle.offensive_card;
                     this.create_defending_set();
-                    this.is_game_loaded = true;
-
-                    
+                    this.is_game_loaded = true;                    
                 });
 
                 socket.on('connect', function () {
