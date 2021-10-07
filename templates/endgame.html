@@ -45,10 +45,14 @@
                 </div>
             </div>
         </div> 
-        <div class="endgame__buttons">
-            <a href="javascript:;" class="button"><span>Следующий раунд</span></a>
-            <a href="javascript:;" class="button"><span>Создать новую игру</span></a>
-        </div>
+        <form method="post" action="/logout">
+            {{ form.csrf_token }}
+                <div class="endgame__buttons">
+                    <button v-on:click="restart" type="button" class="button"><span>Следующий раунд</span></button>
+                    <button type="submit" value="exit" class="button"><span>Создать новую игру</span></button>
+                </div>
+        </form>
+        
     </div>
 </div>
 
@@ -124,7 +128,11 @@
                 } else {
                     return undefined;
                 }
-            },
+            },  
+            
+            restart: function () {
+                console.log(1234)
+            }
         }
     })
 </script>

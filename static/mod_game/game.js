@@ -40,10 +40,11 @@ Vue.component('card', {
             return this.cards[this.card_id];
         },
         def_value: function () {
-            if (!this.vs) {
+            if (!this.cur_played_card && !this.vs) {
                 return 0;
             }
-            const def = this.card.def_against.filter((x) => x.other_card == this.vs)[0];
+            const cardId = this.cur_played_card || this.vs;
+            const def = this.card.def_against.filter((x) => x.other_card == cardId)[0];
             return (def && def.value) || 0;
         },
         dmg_value: function () {
@@ -117,7 +118,7 @@ Vue.component('card', {
             }
         },
         popup: function () { 
-            cardBig.show(this.card.id);
+            cardBig.show(this.card.id, this.dmg_value);
         },
         get_against_cls: function (id) {
             if (id === this.cur_played_card) return `against__icon against__icon_${id} bright`;
@@ -307,13 +308,13 @@ Vue.component('cardbig', {
             return `card__icon card__img_${id}`;
         },
         get_against_cls: function (id) {
-            if (id === this.cur_played_card) return `against__icon against__icon_${id} bright`;
             return `against__icon against__icon_${id}`;
         },
-        show: function (id) { 
+        show: function (id, dmg_value) { 
             this.loaded = false;
             this.id = id;
             this.shown = true; 
+            this.dmg_value = dmg_value;
             MicroModal.show('modalCardDesc',{
                 //onShow: modal => console.info(`${modal.id} is shown`),  
                 //onClose: modal => console.info(`${modal.id} is hidden`), 
