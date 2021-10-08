@@ -48,8 +48,7 @@
         <form method="post" action="/logout">
             {{ form.csrf_token }}
                 <div class="endgame__buttons">
-                    <button v-on:click="restart" type="button" class="button"><span>Следующий раунд</span></button>
-                    <button type="submit" value="exit" class="button"><span>Создать новую игру</span></button>
+                    <button type="submit" value="exit" class="button"><span>Выйти в главное меню</span></button>
                 </div>
         </form>
         
@@ -129,10 +128,6 @@
                     return undefined;
                 }
             },  
-            
-            restart: function () {
-                console.log(1234)
-            }
         }
     })
 </script>
